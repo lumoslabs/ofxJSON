@@ -8,7 +8,7 @@
  */
 
 #include "ofxJSONElement.h"
-
+#include "ofUtils.h"
 
 //--------------------------------------------------------------
 ofxJSONElement::ofxJSONElement(Json::Value& v) : Value(v) {
@@ -45,7 +45,7 @@ bool ofxJSONElement::open(string filename) {
 
 //--------------------------------------------------------------
 bool ofxJSONElement::openLocal(string filename, bool inDocuments) {
-	filename = ofToDataPath(filename, true, inDocuments);
+	filename = ofToDataPath(filename, inDocuments);
 	ifstream myfile(filename.c_str());
 	
 	if (!myfile.is_open()) {
@@ -87,7 +87,7 @@ bool ofxJSONElement::openRemote(string filename, bool secure)
 //--------------------------------------------------------------
 bool ofxJSONElement::save(string filename, bool pretty, bool inDocuments)
 {
-	filename = ofToDataPath(filename, true, inDocuments);
+	filename = ofToDataPath(filename, inDocuments);
 	ofstream file_key(filename.c_str());
 	if (!file_key.is_open()) {
 		ofLog(OF_LOG_WARNING, "Unable to open "+filename);
