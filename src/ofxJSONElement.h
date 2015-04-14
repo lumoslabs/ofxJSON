@@ -13,7 +13,12 @@
 #include <iostream>
 #include <fstream>
 #include <json/json.h>
-#include "ofMain.h"
+
+// TZLA-619 // #include "ofMain.h"
+
+#include <vector>
+
+using namespace std;
 
 class ofxJSONElement: public Json::Value {
 public:

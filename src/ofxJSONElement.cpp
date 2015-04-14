@@ -8,6 +8,7 @@
  */
 
 #include "ofxJSONElement.h"
+#include "ofUtils.h"
 
 
 //--------------------------------------------------------------
@@ -24,7 +25,7 @@ ofxJSONElement::ofxJSONElement(string jsonString) {
 bool ofxJSONElement::parse(string jsonString) {
 	Json::Reader reader;
 	if(!reader.parse( jsonString, *this )) {
-		ofLog(OF_LOG_WARNING, "Unable to parse string");
+		// TZLA-619 // ofLog(OF_LOG_WARNING, "Unable to parse string");
 		return false;
 	}
 	return true;
@@ -49,7 +50,7 @@ bool ofxJSONElement::openLocal(string filename, bool inDocuments) {
 	ifstream myfile(absoluteFilename.c_str());
 	
 	if (!myfile.is_open()) {
-		ofLog(OF_LOG_VERBOSE, "Could not open "+absoluteFilename);
+		// TZLA-619 // ofLog(OF_LOG_VERBOSE, "Could not open "+absoluteFilename);
 		return false;
 	}
 	
@@ -63,7 +64,7 @@ bool ofxJSONElement::openLocal(string filename, bool inDocuments) {
 	
 	Json::Reader reader;
 	if(!reader.parse( strTotal, *this )) {
-		ofLog(OF_LOG_WARNING, "Unable to parse "+absoluteFilename);
+		// TZLA-619 // ofLog(OF_LOG_WARNING, "Unable to parse "+absoluteFilename);
 		return false;
 	}
 	return true;
@@ -73,14 +74,15 @@ bool ofxJSONElement::openLocal(string filename, bool inDocuments) {
 //--------------------------------------------------------------
 bool ofxJSONElement::openRemote(string filename, bool secure)
 {
-	string result = ofLoadURL(filename).data.getText();
+/* TZLA-619 // 	string result = ofLoadURL(filename).data.getText();
 	
 	Json::Reader reader;
 	if(!reader.parse( result, *this )) {
-		ofLog(OF_LOG_WARNING, "Unable to parse "+filename);
+		// TZLA-619 // ofLog(OF_LOG_WARNING, "Unable to parse "+filename);
 		return false;
 	}
-	return true;
+	return true;*/
+    return false;
 }
 
 
@@ -90,7 +92,7 @@ bool ofxJSONElement::save(string filename, bool pretty, bool inDocuments)
 	string absoluteFilename = ofToPath(filename, inDocuments, true);
 	ofstream file_key(absoluteFilename.c_str());
 	if (!file_key.is_open()) {
-		ofLog(OF_LOG_WARNING, "Unable to open "+absoluteFilename);
+		// TZLA-619 // ofLog(OF_LOG_WARNING, "Unable to open "+absoluteFilename);
 		return false;
 	}
 	
@@ -101,7 +103,7 @@ bool ofxJSONElement::save(string filename, bool pretty, bool inDocuments)
 		Json::FastWriter writer;
 		file_key << writer.write( *this ) << endl;
 	}
-	ofLog(OF_LOG_VERBOSE, "JSON saved to "+absoluteFilename);
+	// TZLA-619 // ofLog(OF_LOG_VERBOSE, "JSON saved to "+absoluteFilename);
 	file_key.close();	
 	return true;
 }
