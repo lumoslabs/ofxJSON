@@ -74,7 +74,7 @@ bool ofxJSONElement::openLocal(string filename, bool inDocuments) {
 //--------------------------------------------------------------
 bool ofxJSONElement::openRemote(string filename, bool secure)
 {
-/* TZLA-619 // 	string result = ofLoadURL(filename).data.getText();
+/* IOSP-40 // 	string result = ofLoadURL(filename).data.getText();
 	
 	Json::Reader reader;
 	if(!reader.parse( result, *this )) {
